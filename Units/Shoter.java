@@ -1,6 +1,6 @@
 package Units;
 
-public class Shoter extends Unit{
+public abstract class Shoter extends Unit{
     protected int distance, maxCountBullet,currentCountBullet;
     protected float accuracy;
 

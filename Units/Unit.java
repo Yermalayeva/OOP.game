@@ -1,6 +1,6 @@
 package Units;
 
-public class Unit {
+public abstract class Unit implements GameInterface{
     protected String name;
     protected float hp;
     protected float luck;
@@ -30,9 +30,6 @@ public class Unit {
     }
     void dead(){
 
-    }
-    public char[] getInfo() {
-        return null;
     }
     
 }

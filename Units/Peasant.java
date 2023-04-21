@@ -8,4 +8,12 @@ public class Peasant extends Unit {
     public String toString(){
         return "Крестьянин";
     }
+    @Override
+    public void step() {
+        
+    }
+    @Override
+    public String getInfo() {
+       return null;
+    }
 }

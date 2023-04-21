@@ -18,4 +18,14 @@ public class Thief extends Unit {
 
     }
 
+    @Override
+    public void step() {
+        
+    }
+
+    @Override
+    public String getInfo() {
+        return name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " ущерб: " + damage;
+    } 
+
 }

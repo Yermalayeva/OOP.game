@@ -9,4 +9,12 @@ public class Magican extends Unit{
     void Heal(){
 
     }
+    @Override
+    public void step() {
+        
+    }
+    @Override
+    public String getInfo() {
+       return null;
+    }
 }
