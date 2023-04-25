@@ -1,19 +1,18 @@
 package Units;
 
+import java.util.ArrayList;
+
 public class Peasant extends Unit {
-    public Peasant(String name){
-        super(name, 10, 0.5f, 1, 1);
+    public Peasant(String name, ArrayList<Unit> team){
+        super(name, 10, 0.5f, 1, 1, 0);
     }
     @Override
     public String toString(){
         return "Крестьянин";
     }
-    @Override
-    public void step() {
-        
-    }
+    
     @Override
     public String getInfo() {
-       return null;
-    }
+       return super.getInfo();
+    }  
 }

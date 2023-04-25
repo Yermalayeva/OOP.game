@@ -1,8 +1,11 @@
 package Units;
 
+import java.util.ArrayList;
+
 public class Thief extends Unit {
-    public Thief(String name){
-        super(name, 20, 0.8f, 3, 2);
+    public Thief(String name, ArrayList<Unit> team){
+        super(name, 20, 0.8f, 3, 2, 10);
+        //super(name, 20, 0.8f, 3, 2, 10, team);
     }
 
     @Override
@@ -18,14 +21,12 @@ public class Thief extends Unit {
 
     }
 
-    @Override
-    public void step() {
-        
-    }
+   
 
     @Override
     public String getInfo() {
-        return name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " ущерб: " + damage;
+        //return name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " ущерб: " + damage;
+        return super.getInfo();
     } 
 
 }
