@@ -8,21 +8,27 @@ public abstract class Unit implements GameInterface{
     protected static float armor;
     protected int attack;
     public int speed;
-    protected static ArrayList<Unit> team;
+    //protected static ArrayList<Unit> team;
+    protected ArrayList<Unit> team, enemy;
+    protected Coordinate coordinate;
     
-    Unit(String name, float hp, float luck, int speed, int damage, float armor){
+    //Unit(String name, float hp, float luck, int speed, int damage, float armor, ArrayList<Unit> team2, int x, int y){
+    Unit(String name, float maxHp, float luck, int speed, int attack, float armor, ArrayList<Unit> team, int x, int y){
         this.name = name;
-        this.maxHp = hp;
+        this.maxHp = maxHp;
         this.currentHp = maxHp;
         this.luck = luck;
         this.speed = speed;
         this.attack = attack;
         this.armor = armor;
         this.team = team;
+        this.coordinate = new Coordinate(x, y);
     }
     
-        void attack(){
-
+    //void attack(){
+    void attack(Unit target){
+        target.getDmage(attack);
+        System.out.println(this.introduce() + " атакует " + target.introduce());
     }
     void await(){
 
@@ -30,8 +36,15 @@ public abstract class Unit implements GameInterface{
     void defend(){
 
     }
-    void die(){
+    //void die(){
 
+    //}
+    boolean die(){
+        if (currentHp <= 0) {
+            return true;
+        }else{
+            return false;
+        }
     }
     public void getDmage(float damage){
         this.currentHp -= damage;
@@ -50,8 +63,25 @@ public abstract class Unit implements GameInterface{
         + " armor:" + armor;
     }
     @Override
-    public void step(){
+    //public void step(){
+    public void step(ArrayList<Unit> enemy) {
         System.out.println(getClass().getName());
     }
-    
+    public Unit findNearUnit(ArrayList<Unit> team){
+        Unit nearUnit = null;
+        float minDist = Float.MAX_VALUE;
+        for (Unit unit : team) {
+            float dist = unit.coordinate.distance(this.coordinate);
+            if (minDist > dist) {
+                nearUnit = unit;
+                minDist = dist;
+            }
+        }
+        return nearUnit;
+    }
+
+    @Override
+    public String introduce() {
+        return this + " " + this.name;
+    }
 }
