@@ -31,7 +31,8 @@ public abstract class Magican extends Shooter{
     
     @Override
     public String getInfo() {
-       return super.getInfo() + "mana: " + currentMana + "/" +maxMana;
+       //return super.getInfo() + "mana: " + currentMana + "/" +maxMana;
+       return super.getInfo() + " \u26a1:" + currentMana + "/" + maxMana;
     }
     @Override
     //public void step() {
@@ -42,6 +43,7 @@ public abstract class Magican extends Shooter{
                 if (unit.currentHp < unit.maxHp) {
                     unit.getDmage(-attack);
                     this.currentMana--;
+                    //System.out.println(this.introduce() + " лечит " + unit.introduce());
                     System.out.println(this.introduce() + " лечит " + unit.introduce());
                     return;
                 }

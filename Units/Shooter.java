@@ -22,9 +22,11 @@ public abstract class Shooter extends Unit {
     //}
     @Override
     public String getInfo() {
-        return super.getInfo() + " distance:" + distance +
+        /*return super.getInfo() + " distance:" + distance +
                 " bullets:" + currentCountBullet + "/" + maxCountBullet + 
-                " accuracy:" + accuracy;
+                " accuracy:" + accuracy;*/
+        return super.getInfo() + " distance:" + distance +
+        " \u27b9:" + currentCountBullet + "/" + maxCountBullet;
     }
 
     @Override

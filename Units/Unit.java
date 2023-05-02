@@ -1,6 +1,7 @@
 package Units;
-
+import Game.Coordinate;
 import java.util.ArrayList;
+
 
 public abstract class Unit implements GameInterface{
     protected String name;
@@ -57,16 +58,19 @@ public abstract class Unit implements GameInterface{
     }
     @Override
     public String getInfo(){
-        return "[" + name + " " + toString() + "] hp:" + 
+        /*return "[" + name + " " + toString() + "] hp:" + 
         currentHp + "/" + maxHp + " luck:" + luck 
         + " speed:" + speed + " attack:" + attack
-        + " armor:" + armor;
+        + " armor:" + armor;*/
+        return toString() + " " + name + " \u2665:" +
+        currentHp + "/" + maxHp + " \u2659:" + speed + " \u2618:" + luck + " \u2694:" + attack;
     }
     @Override
     //public void step(){
     public void step(ArrayList<Unit> enemy) {
         System.out.println(getClass().getName());
     }
+
     public Unit findNearUnit(ArrayList<Unit> team){
         Unit nearUnit = null;
         float minDist = Float.MAX_VALUE;
@@ -83,5 +87,14 @@ public abstract class Unit implements GameInterface{
     @Override
     public String introduce() {
         return this + " " + this.name;
+    }
+
+    @Override
+    public int[] getCoords(){
+        return new int[]{this.coordinate.y, coordinate.x};
+    }
+
+    public float getHp() {
+        return currentHp;
     }
 }
