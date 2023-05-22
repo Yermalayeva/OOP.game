@@ -3,9 +3,7 @@ package Units;
 import java.util.ArrayList;
 
 public class Peasant extends Unit {
-    //public Peasant(String name, ArrayList<Unit> team){
-        //super(name, 10, 0.5f, 1, 1, 0);
-
+    
     protected boolean readiness;
 
     public Peasant(String name, ArrayList<Unit> team, int x, int y) {
@@ -14,7 +12,7 @@ public class Peasant extends Unit {
     }
     @Override
     public String toString(){
-        return "Крестьянин";
+        return "Пизант";
     }
     
     @Override
@@ -26,11 +24,9 @@ public class Peasant extends Unit {
     public void step(ArrayList<Unit> enemy) {
         if (readiness) {
             //System.out.println(this + " " + this.name + " ничего не делает");
-            System.out.println(this + " " + this.name + " ничего не делает");
         }else{
             readiness = true;
             //System.out.println(this + " " + this.name + " находит припасы");
-            System.out.println(this + " " + this.name + " находит припасы");
         }
     }
 }

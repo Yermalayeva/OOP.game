@@ -9,11 +9,9 @@ public abstract class Unit implements GameInterface{
     protected static float armor;
     protected int attack;
     public int speed;
-    //protected static ArrayList<Unit> team;
-    protected ArrayList<Unit> team, enemy;
+    protected ArrayList<Unit> team;
     protected Coordinate coordinate;
     
-    //Unit(String name, float hp, float luck, int speed, int damage, float armor, ArrayList<Unit> team2, int x, int y){
     Unit(String name, float maxHp, float luck, int speed, int attack, float armor, ArrayList<Unit> team, int x, int y){
         this.name = name;
         this.maxHp = maxHp;
@@ -29,7 +27,7 @@ public abstract class Unit implements GameInterface{
     //void attack(){
     void attack(Unit target){
         target.getDmage(attack);
-        System.out.println(this.introduce() + " атакует " + target.introduce());
+        //System.out.println(this.introduce() + " атакует " + target.introduce());
     }
     void await(){
 
@@ -37,9 +35,6 @@ public abstract class Unit implements GameInterface{
     void defend(){
 
     }
-    //void die(){
-
-    //}
     boolean die(){
         if (currentHp <= 0) {
             return true;
@@ -58,23 +53,28 @@ public abstract class Unit implements GameInterface{
     }
     @Override
     public String getInfo(){
-        /*return "[" + name + " " + toString() + "] hp:" + 
-        currentHp + "/" + maxHp + " luck:" + luck 
-        + " speed:" + speed + " attack:" + attack
-        + " armor:" + armor;*/
         return toString() + " " + name + " \u2665:" +
         currentHp + "/" + maxHp + " \u2659:" + speed + " \u2618:" + luck + " \u2694:" + attack;
     }
     @Override
-    //public void step(){
     public void step(ArrayList<Unit> enemy) {
-        System.out.println(getClass().getName());
+        //System.out.println(getClass().getName());
+        if (die()) {
+            return;
+        }
+        Unit target = findNearUnit(enemy);
+        if (target.coordinate.distance(this.coordinate) < 2) {
+            attack(target);
+        }else {
+            move(target);
+        }
     }
 
     public Unit findNearUnit(ArrayList<Unit> team){
         Unit nearUnit = null;
         float minDist = Float.MAX_VALUE;
         for (Unit unit : team) {
+            if(unit.die())continue;
             float dist = unit.coordinate.distance(this.coordinate);
             if (minDist > dist) {
                 nearUnit = unit;
@@ -96,5 +96,58 @@ public abstract class Unit implements GameInterface{
 
     public float getHp() {
         return currentHp;
+    }
+
+    protected void move(Unit target){
+        int dx = target.coordinate.distanceXY(this.coordinate)[0];
+        int dy = target.coordinate.distanceXY(this.coordinate)[1];
+        if (Math.abs(dx) < Math.abs(dy)){
+            moveY(dx, dy, true);
+        }else {
+            moveX(dx, dy, true);
+        }
+    }
+
+    private void moveX(int dx, int dy, boolean flag){
+        if (dx > 0) {
+            if (isEmptyPosition(this.coordinate.x-1, this.coordinate.y)) {
+                this.coordinate.x--;
+            }else if(flag){
+                moveY(dx,dy, false);
+            }
+        }else {
+            if (isEmptyPosition(this.coordinate.x+1, this.coordinate.y)) {
+                this.coordinate.x++;
+            }else if(flag){
+                moveY(dx,dy, false);
+            }
+        }
+    }
+    private void moveY(int dx, int dy, boolean flag){
+        if (dy > 0) {
+            if (isEmptyPosition(this.coordinate.x, this.coordinate.y-1)) {
+                this.coordinate.y--;
+            }else if(flag){
+                moveX(dx,dy, false);
+            }
+        }else {
+            if (isEmptyPosition(this.coordinate.x, this.coordinate.y+1)) {
+                this.coordinate.y++;
+            }else if(flag){
+                moveX(dx,dy, false);
+            }
+        }
+    }
+
+
+    protected boolean isEmptyPosition(int x, int y){
+        for (Unit unit: team) {
+            if (unit.coordinate.x == x && unit.coordinate.y == y) {
+                if (!unit.die()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

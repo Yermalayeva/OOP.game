@@ -31,20 +31,17 @@ public abstract class Magican extends Shooter{
     
     @Override
     public String getInfo() {
-       //return super.getInfo() + "mana: " + currentMana + "/" +maxMana;
        return super.getInfo() + " \u26a1:" + currentMana + "/" + maxMana;
     }
     @Override
-    //public void step() {
-        //if (this.currentHp > 0 && currentMana > 0) {
     public void step(ArrayList<Unit> enemy) {
         if (!die() && currentMana > 0) {
             for (Unit unit : team) {
-                if (unit.currentHp < unit.maxHp) {
+                //if (unit.currentHp < unit.maxHp) 
+                if (!unit.die() && unit.currentHp < unit.maxHp){
                     unit.getDmage(-attack);
                     this.currentMana--;
                     //System.out.println(this.introduce() + " лечит " + unit.introduce());
-                    System.out.println(this.introduce() + " лечит " + unit.introduce());
                     return;
                 }
             }

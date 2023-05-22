@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 public class Spearman extends Unit {
 
-    //public Spearman(String name,ArrayList<Unit> team){
-        //super(name, 30, 0.6f, 3, 4, 30);
     public Spearman(String name, ArrayList<Unit> team,  int x, int y){
-        super(name, 30, 0.6f, 3, 4, 30, team, x, y);
+        super(name, 30, 0.6f, 3, 3, 30, team, x, y);
     }
     @Override
     public String toString(){
@@ -16,7 +14,6 @@ public class Spearman extends Unit {
 
     @Override
     public String getInfo() {
-        //return name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " ущерб: " + damage;
         return super.getInfo();
     }
     
